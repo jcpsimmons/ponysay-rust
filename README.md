@@ -84,6 +84,8 @@ The Rust gear logo is also part of the default random selection. It uses
 rust-orange half blocks in 256-color terminals and the bright-red palette slot
 on Linux consoles. `--no-color` preserves the same silhouette without color.
 
+![Rust gear logo saying "Fearless concurrency. Friendly ponies." in native terminal output](rust/visual-checks/rust.png)
+
 Custom assets in `$XDG_DATA_HOME/ponysay`, `~/.local/share/ponysay`, or directories
 given with `--data-dir` / `PONYSAY_DATA_DIR` override the bundled assets. Use the
 subdirectories `ponies`, `extraponies`, `ttyponies`, `extrattyponies`, `quotes`,
