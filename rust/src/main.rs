@@ -45,7 +45,10 @@ struct Options {
     message: Vec<String>,
 }
 
-const HELP: &str = r#"ponysay-rust 4.0.0 (Rust)
+const HELP: &str = concat!(
+    "ponysay-rust ",
+    env!("CARGO_PKG_VERSION"),
+    r#" (Rust)
 Usage: ponysay [options] [--] [message ...]
        ponythink [options] [message ...]
        fortune | ponysay
@@ -74,7 +77,8 @@ Usage: ponysay [options] [--] [message ...]
 All original ponies, aliases, quotes, and balloons are bundled. User assets in
 $XDG_DATA_HOME/ponysay or ~/.local/share/ponysay override bundled assets.
 Messages are literal text: backslashes, quotes, and dollar signs are never code.
-"#;
+"#
+);
 
 fn expand_short_cluster(raw: &str) -> Result<Option<Vec<String>>, String> {
     if raw.len() <= 2 || raw.starts_with("--") || raw.starts_with("++") {

@@ -1,3 +1,11 @@
+Version 4.1.0 (Rust)
+
+        Added the Rust gear logo to the bundled random pony selection.
+        Select it directly with -f rust in speech or thought mode.
+        Includes a Linux-console palette variant and monochrome support.
+        Added terminal captures and an inline README screenshot.
+        Help and version output now share the Cargo package version.
+
 Version 3.0.4
 
 	New rxtraponies: raripunk, smolder, solarflare
