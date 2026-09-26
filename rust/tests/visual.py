@@ -66,7 +66,7 @@ def color(value, background=False):
         return "#" + value
     return "#d7dae0"
 
-def image(name, args, title):
+def image(name, args, title, *, solid_blocks=False):
     data = capture(args)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"{name}.ansi").write_bytes(data)
@@ -88,7 +88,14 @@ def image(name, args, title):
             if cell.reverse:
                 fg, bg = bg, fg
             draw.rectangle((24 + x*cw, 80 + y*ch, 24 + (x+1)*cw, 80 + (y+1)*ch), fill=bg)
-            draw.text((24 + x*cw, 80 + y*ch), cell.data, font=font, fill=fg, anchor="la")
+            if solid_blocks and cell.data in ("█", "▀", "▄"):
+                # Fill terminal cells exactly, without font line-spacing gaps.
+                px, py = 24 + x*cw, 80 + y*ch
+                top = py + (ch // 2 if cell.data == "▄" else 0)
+                bottom = py + (ch // 2 if cell.data == "▀" else ch)
+                draw.rectangle((px, top, px + cw - 1, bottom - 1), fill=fg)
+            else:
+                draw.text((24 + x*cw, 80 + y*ch), cell.data, font=font, fill=fg, anchor="la")
     draw.text((24, canvas.height-30), "Exit 0 | empty stderr | no Python runtime", font=label, fill="#8b95a5")
     canvas.save(OUT / f"{name}.png")
     print(OUT / f"{name}.png")
@@ -96,3 +103,5 @@ def image(name, args, title):
 image("speech", ["-f", "twilight", "-Wn", "--", r"Rust works: C:\ponies \- $HOME"], "Speech bubble / literal unescaped characters")
 image("thought", ["--think", "-f", "luna", "-W40", "Native Rust.\nThe night is so peaceful."], "Thought bubble / multiline message")
 image("embedded", ["+f", "velvetremedy", "-Wn", "The embedded balloon works."], "Embedded balloon / original colored artwork")
+image("rust", ["-f", "rust", "-Wn", "Fearless concurrency. Friendly ponies."], "Rust gear / speech bubble", solid_blocks=True)
+image("rust-thought", ["--think", "-f", "rust", "-Wn", "Borrow checked."], "Rust gear / thought bubble", solid_blocks=True)

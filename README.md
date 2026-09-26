@@ -61,6 +61,8 @@ release, adoption, maintenance and licensing criteria.
 ponysay 'A random pony says this.'
 printf '%s\n' 'Input from a pipe' | ponysay
 ponysay -f pinkie -f twilight 'Choose one of these ponies.'
+ponysay -f rust 'Fearless concurrency. Friendly ponies.'
+ponythink -f rust 'Borrow checked.'
 ponysay -q twilight
 ponysay -l
 ponysay -A
@@ -77,6 +79,10 @@ Messages are literal text. Backslashes, shell-looking strings, quotes, and dolla
 signs are never interpreted as code or pony-template directives. Unicode width
 and ANSI escapes are handled by the renderer. `NO_COLOR` disables color. A broken
 output pipe exits cleanly.
+
+The Rust gear logo is also part of the default random selection. It uses
+rust-orange half blocks in 256-color terminals and the bright-red palette slot
+on Linux consoles. `--no-color` preserves the same silhouette without color.
 
 Custom assets in `$XDG_DATA_HOME/ponysay`, `~/.local/share/ponysay`, or directories
 given with `--data-dir` / `PONYSAY_DATA_DIR` override the bundled assets. Use the
@@ -140,13 +146,15 @@ output, not screenshots of a desktop Terminal application.
 - [Speech and literal backslashes](rust/visual-checks/speech.png)
 - [Thoughts and multiple lines](rust/visual-checks/thought.png)
 - [Embedded balloon](rust/visual-checks/embedded.png)
+- [Rust gear speech](rust/visual-checks/rust.png)
+- [Rust gear thoughts](rust/visual-checks/rust-thought.png)
 
 The raw `.ansi` captures and the generator `rust/tests/visual.py` are included.
 
-The test suite covers 1,154 bundled pony paths and all eight balloon styles.
-The differential harness makes 1,204 direct comparisons to the retained Python
+The test suite covers 1,156 bundled pony paths and all eight balloon styles.
+The differential harness makes 1,206 direct comparisons to the retained Python
 renderer and checks two known upstream TTY rendering failures against their
-equivalent xterm artwork. All 1,206 checks pass. Normal wrapping matches; Unicode
+equivalent xterm artwork. All 1,208 checks pass. Normal wrapping matches; Unicode
 width, minimum-height behavior, and long-word wrapping include documented fixes.
 
 ## License and attribution
@@ -155,6 +163,13 @@ The program is GPL-3.0-or-later; see [COPYING](COPYING), [LICENSE](LICENSE), and
 [CREDITS](CREDITS). Original authors include Erkin Batu Altunbaş, Mattias Andrée,
 Elis Axelsson, Sven-Hendrik Haase, Jan Alexander Steffens, and Kyah Rindlisbacher.
 The Rust implementation preserves original image metadata and credits.
+
+The `rust` pony adapts the [Rust project's gear logo](https://github.com/rust-lang/rust-artwork/blob/main/logo/rust-logo.svg),
+licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+The terminal adaptation downsamples the logo to 56 by 56 pixels, recolors it,
+and encodes it as half blocks. Source, credit, license and changes are also
+included in each `rust.pony` file. Rust is a trademark of the Rust Foundation;
+this independent project is not endorsed by the Rust project or Foundation.
 
 Individual artwork retains its original licensing conditions. Some assets are
 marked `FREE: no`; bundling them does not relicense them or grant commercial
